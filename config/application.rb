@@ -28,6 +28,7 @@ module Microposts
       g.helper false
       g.test_framework false
     end
+    config.action_view.embed_authenticity_token_in_remote_forms = true
     #config.active_record.raise_in_transactional_callbacks = true
   end
 end
