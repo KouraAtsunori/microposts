@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:edit, :update, :following, :followers]
   before_action :corrent_user, only: [:edit, :update]
   
   def show
@@ -33,6 +33,24 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  def following
+    @title ="Following"
+    @user = User.find(params[:id])
+    @users = @user.following_users.page(params[:page]).per(10)
+    render 'show_follow'
+  end
+  
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.follower_users.page(params[:page])
+    render 'show_follow'
+  end
+  
+  def index
+    @users = User.order(created_at: :desc)
   end
   
   private
