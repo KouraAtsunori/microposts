@@ -35,17 +35,19 @@ class UsersController < ApplicationController
     end
   end
   
+  #20170105 課題：拡張　ページネーション追加
   def following
     @title ="Following"
     @user = User.find(params[:id])
-    @users = @user.following_users.page(params[:page]).per(10)
+    @users = @user.following_users.page(params[:page]).per(5)
     render 'show_follow'
   end
   
+  #20170105 課題：拡張　ページネーション追加
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
-    @users = @user.follower_users.page(params[:page])
+    @users = @user.follower_users.page(params[:page]).per(5)
     render 'show_follow'
   end
   
